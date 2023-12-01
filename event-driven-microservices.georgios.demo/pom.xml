@@ -13,34 +13,64 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>event-driven-microservices.georgios.demo</name>
 	<description>Demo project for Spring Boot</description>
+<!--	We have no source files, so we set the packaging to pom-->
+	<packaging>pom</packaging>
+
 	<properties>
 		<java.version>21</java.version>
+<!--		Variable to handle versioning by referencing it-->
+		<spring-boot.version>3.1.5</spring-boot.version>
+		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<version>${spring-boot.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
+<!--		Maven compiler plugin as found under:
+https://maven.apache.org/plugins/maven-compiler-plugin/
+note that this is not in the plug in management, because it is used application-wide-->
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+<!--				<version>3.11.0</version>-->
 				<configuration>
-					<image>
-						<builder>paketobuildpacks/builder-jammy-base:latest</builder>
-					</image>
+					<release>21</release>
+<!--					<source>1.8</source>-->
+<!--					<target>1.8</target>-->
 				</configuration>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring-boot.version}</version>
+					<configuration>
+						<image>
+							<builder>paketobuildpacks/builder-jammy-base:latest</builder>
+						</image>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>
