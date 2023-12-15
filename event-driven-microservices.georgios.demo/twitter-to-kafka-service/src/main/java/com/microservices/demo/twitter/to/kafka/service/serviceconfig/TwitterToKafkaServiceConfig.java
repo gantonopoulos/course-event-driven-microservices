@@ -14,4 +14,5 @@ public class TwitterToKafkaServiceConfig
 {
     private List<String> twitterKeywords;   // The Name has to match that of the configuration entry in the yml file.
                                             // twitter-keywords -> twitterKeywords. So the convention is that "-k" -> K.
+    private String welcomeMessage;  // Matches welcome-message in application.yml
 }
