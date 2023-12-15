@@ -13,7 +13,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>event-driven-microservices.georgios.demo</name>
 	<description>Demo project for Spring Boot</description>
-<!--	We have no source files, so we set the packaging to pom-->
+	<modules>
+		<module>twitter-to-kafka-service</module>
+	</modules>
+	<!--	We have no source files, so we set the packaging to pom-->
 	<packaging>pom</packaging>
 
 	<properties>
@@ -21,6 +24,8 @@
 <!--		Variable to handle versioning by referencing it-->
 		<spring-boot.version>3.1.5</spring-boot.version>
 		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+		<twitter4j.version>4.0.7</twitter4j.version>
+		<lombok.version>1.18.30</lombok.version>
 	</properties>
 
 	<dependencyManagement>
@@ -30,12 +35,23 @@
 				<artifactId>spring-boot-starter</artifactId>
 				<version>${spring-boot.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-test</artifactId>
 				<version>${spring-boot.version}</version>
 				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.twitter4j</groupId>
+				<artifactId>twitter4j-stream</artifactId>
+				<version>${twitter4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+<!--				"provided" denotes that this is a compile-only tool and not required in runtime-->
+				<scope>provided</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

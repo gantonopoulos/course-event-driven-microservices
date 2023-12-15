@@ -1,0 +1,7 @@
+twitter-to-kafka-service:
+  twitter-keywords: # We will use the following keywords to filter messages coming from twitter
+    - Java
+    - Microservices
+    - Spring
+    - Kafka
+    - Elasticsearch
