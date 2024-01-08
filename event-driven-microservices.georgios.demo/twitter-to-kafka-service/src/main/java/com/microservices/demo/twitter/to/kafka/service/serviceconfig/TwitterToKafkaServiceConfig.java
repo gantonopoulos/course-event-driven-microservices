@@ -10,9 +10,12 @@ import java.util.List;
         // These will only be present in the byte-code to be accessed by jvm.
 @Configuration
 @ConfigurationProperties(prefix = "twitter-to-kafka-service")
-public class TwitterToKafkaServiceConfig
-{
+public class TwitterToKafkaServiceConfig {
     private List<String> twitterKeywords;   // The Name has to match that of the configuration entry in the yml file.
-                                            // twitter-keywords -> twitterKeywords. So the convention is that "-k" -> K.
+    // twitter-keywords -> twitterKeywords. So the convention is that "-k" -> K.
     private String welcomeMessage;  // Matches welcome-message in application.yml
+    private Boolean enableMockTweets;
+    private Long mockSleepMs;
+    private Integer mockMinTweetLength;
+    private Integer mockMaxTweetLength;
 }
