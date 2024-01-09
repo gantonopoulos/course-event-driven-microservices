@@ -26,10 +26,10 @@
             <artifactId>twitter4j-stream</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <!--				"provided" denotes that this is a compile-only tool and not required in runtime-->
-            <scope>provided</scope>
+            <groupId>com.event-driven-microservices.georgios</groupId>
+            <artifactId>app-config-data</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
