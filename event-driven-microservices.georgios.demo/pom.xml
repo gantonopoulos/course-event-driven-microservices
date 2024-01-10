@@ -20,6 +20,7 @@
 		<module>kafka/kafka-admin</module>
 		<module>kafka/kafka-model</module>
 		<module>kafka/kafka-producer</module>
+		<module>common-config</module>
 	</modules>
 	<!--	We have no source files, so we set the packaging to pom-->
 	<packaging>pom</packaging>
@@ -32,13 +33,21 @@
 		<twitter4j.version>4.0.7</twitter4j.version>
 		<lombok.version>1.18.30</lombok.version>
 		<avro.version>1.11.3</avro.version>
+		<spring-kafka.version>3.1.1</spring-kafka.version>
+		<spring-retry.version>2.0.5</spring-retry.version>
+		<spring-aop.version>3.2.1</spring-aop.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.microservices.demo</groupId>
+				<groupId>com.event-driven-microservices.georgios</groupId>
 				<artifactId>app-config-data</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.event-driven-microservices.georgios</groupId>
+				<artifactId>common-config</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -51,6 +60,21 @@
 				<artifactId>spring-boot-starter-test</artifactId>
 				<version>${spring-boot.version}</version>
 				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.retry</groupId>
+				<artifactId>spring-retry</artifactId>
+				<version>${spring-retry.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-aop</artifactId>
+				<version>${spring-aop.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.twitter4j</groupId>
@@ -68,6 +92,11 @@
 				<groupId>org.apache.avro</groupId>
 				<artifactId>avro</artifactId>
 				<version>${avro.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.kafka</groupId>
+				<artifactId>spring-kafka</artifactId>
+				<version>${spring-kafka.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
