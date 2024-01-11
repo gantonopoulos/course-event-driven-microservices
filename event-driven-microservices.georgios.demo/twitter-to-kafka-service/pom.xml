@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.event-driven-microservices.georgios</groupId>
-        <artifactId>event-driven-microservices.georgios.demo</artifactId>
+        <groupId>com.microservices.demo</groupId>
+        <artifactId>microservices-demo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -26,11 +26,23 @@
             <artifactId>twitter4j-stream</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.event-driven-microservices.georgios</groupId>
+            <groupId>com.microservices.demo</groupId>
             <artifactId>app-config-data</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.microservices.demo</groupId>
+            <artifactId>kafka-admin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.microservices.demo</groupId>
+            <artifactId>kafka-producer</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+
     </dependencies>
 
     <properties>
