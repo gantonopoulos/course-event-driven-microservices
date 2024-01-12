@@ -1,0 +1,14 @@
+# This file will be loaded before the application.yml file and has priority over it. This file will be used
+# to obtain the application's configuration from the config-server-repository before  the application.yml
+# file loads.
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+#          uri: file://Users/Shared/projects/microservices-demo/config-server-repository
+          uri: file://home/pontifikas/development/courses/course-event-driven-microservices/event-driven-microservices.georgios.demo/config-server-repository
+          clone-on-start: true # telling the service to clone the configuration-server-repository on-startup
+    fail-fast: true
