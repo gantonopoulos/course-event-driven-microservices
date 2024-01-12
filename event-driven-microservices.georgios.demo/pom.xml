@@ -205,11 +205,6 @@ note that this is not in the plug in management, because it is used application-
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
 					<version>${spring-boot.version}</version>
-					<configuration>
-						<image>
-							<builder>paketobuildpacks/builder-jammy-base:latest</builder>
-						</image>
-					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
