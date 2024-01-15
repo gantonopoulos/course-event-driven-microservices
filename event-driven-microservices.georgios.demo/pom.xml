@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.5</version>
+		<version>3.2.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.microservices.demo</groupId>
@@ -29,7 +29,7 @@
 	<properties>
 		<java.version>21</java.version>
 <!--		Variable to handle versioning by referencing it-->
-		<spring-boot.version>3.1.7</spring-boot.version>
+		<spring-boot.version>3.2.1</spring-boot.version>
 		<maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
 		<twitter4j.version>4.0.7</twitter4j.version>
 		<lombok.version>1.18.30</lombok.version>
@@ -102,11 +102,11 @@
 				</exclusions>
 			</dependency>
 
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter</artifactId>
-				<version>${spring-boot.version}</version>
-			</dependency>
+<!--			<dependency>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-starter</artifactId>-->
+<!--				<version>${spring-boot.version}</version>-->
+<!--			</dependency>-->
 
 			<dependency>
 				<groupId>org.springframework.retry</groupId>
@@ -196,8 +196,21 @@
 				<scope>import</scope>
 			</dependency>
 
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-config</artifactId>
+				<version>${spring-cloud.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+			<version>${spring-cloud.version}</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 <!--		Maven compiler plugin as found under:
