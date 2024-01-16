@@ -11,10 +11,13 @@ spring:
 #          uri: file://Users/Shared/projects/microservices-demo/config-server-repository
           uri: https://github.com/gantonopoulos/sprint-cloud-config-server-repository
           username: gantonopoulos
-          password: *
+          password: ENC(93c4Rn+Q0bHsBUmUxf0zdZVL37SXfjHkwVlxa8kPo2V5NNw3Os483XTbPwlHM9aX1ZYEqKtfQpyi3ysCMHN2l5aAcUYQz1WyInlV8UBY880=)
           clone-on-start: true # telling the service to clone the configuration-server-repository on-startup
     fail-fast: true
   security:
     user:
-      name: pontifikas
-      password: pont1fik@s
+      name: gantonop
+      password: ENC(K7YAKj6RTcgFixtYLYCP6jwcO9SG4RLHBzqHDvlachTrKPF1R+SeSJPMW+zuWAoEbpZRhJx1OTB3ldyA9suYvQ==)
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}

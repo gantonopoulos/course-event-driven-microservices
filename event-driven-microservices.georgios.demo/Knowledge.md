@@ -30,3 +30,17 @@ command without the service container (we want to start twitter-to-kafka-service
 
 2) Next we need to run the ConfigServer application, because the twitter-to-kafka-service will try to access it to read the configuration values and populate its configuration model. We can start the ConfigServer from the IDE (there exists a build configuration).
 3) Now we can run the twitter-to-kafka-service from the IDE as well (another build configuration). We should see that the service is accessing http://localhost:8888 for configuration, which is where the ConfigServer is running.
+
+
+# Accessing the ConfigServer from the browser
+Since the ConfigServer runs ... as a server in the background, we can try to access it through:
+
+http://localhost/config-client/twitter_to_kafka
+
+i.e. use the "Configuration application name"+"Active profile"
+
+# Secrets
+## Encrytpion
+### Jsypt encryption
+I have encrypted all passwords(git, config-server, twitter-to-kafka-service) using this encryption.
+JASYPT_ENCRYPTOR_PASSWORD environment variable is defined in the IDE as well as in my bashrc.
