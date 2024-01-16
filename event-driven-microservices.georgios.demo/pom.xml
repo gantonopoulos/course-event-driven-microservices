@@ -201,6 +201,13 @@
 				<artifactId>spring-cloud-starter-config</artifactId>
 				<version>${spring-cloud.version}</version>
 			</dependency>
+<!--This dependency adds a basic authentication automatically-->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-security</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
