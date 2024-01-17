@@ -39,6 +39,7 @@
 		<spring-aop.version>3.2.1</spring-aop.version>
 		<spring-cloud.version>4.1.0</spring-cloud.version>
 		<spring-cloud-dependencies.version>2023.0.0</spring-cloud-dependencies.version>
+		<spring-security-config.version>6.2.1</spring-security-config.version>
 		<kafka-avro-serializer.version>7.5.1</kafka-avro-serializer.version>
 		<javax.annotation-api.version>1.3.2</javax.annotation-api.version>
 	</properties>
@@ -201,6 +202,13 @@
 				<artifactId>spring-cloud-starter-config</artifactId>
 				<version>${spring-cloud.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${spring-security-config.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
