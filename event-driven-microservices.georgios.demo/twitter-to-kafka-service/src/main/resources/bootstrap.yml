@@ -9,4 +9,4 @@ spring:
       # so it points to the configuration file in config-server-repository. I guess we will find out eventually.
       name: twitter-to-kafka-service,config-client
       username: spring_cloud_user
-      password: '1234'
+      password: '{cipher}c6a082bb8c1470dcc0c78685d8cbe6c409447c69ea89b47a3ee6e71e2f9761213a0e398dda3600fd54db143a76224f68'

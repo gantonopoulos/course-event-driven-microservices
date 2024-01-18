@@ -12,10 +12,10 @@ spring:
           uri: https://github.com/gantonopoulos/sprint-cloud-config-server-repository
           default-label: main
           username: gantonopoulos
-          password:
+          password: '{cipher}68e1cb54d52153278556f55caea75e6be814a6c88d4b1ced5352a11f8692e7f31657abd7e53a2f21d170d145ac0d60fdf7289063d8b39b3d0c5e61ef068958b6'
           clone-on-start: true # telling the service to clone the configuration-server-repository on-startup
     fail-fast: true
   security:
     user:
       name: spring_cloud_user
-      password: '1234'
+      password: '{cipher}c6a082bb8c1470dcc0c78685d8cbe6c409447c69ea89b47a3ee6e71e2f9761213a0e398dda3600fd54db143a76224f68'
