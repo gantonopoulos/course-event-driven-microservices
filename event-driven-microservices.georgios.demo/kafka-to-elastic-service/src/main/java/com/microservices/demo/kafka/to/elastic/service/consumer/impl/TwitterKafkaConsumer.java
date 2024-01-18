@@ -1,6 +1,7 @@
 package com.microservices.demo.kafka.to.elastic.service.consumer.impl;
 
 import com.microservices.demo.config.KafkaConfigData;
+import com.microservices.demo.config.KafkaConsumerConfigData;
 import com.microservices.demo.kafka.admin.client.KafkaAdminClient;
 import com.microservices.demo.kafka.avro.model.TwitterAvroModel;
 import com.microservices.demo.kafka.to.elastic.service.consumer.KafkaConsumer;
@@ -29,13 +30,27 @@ public class TwitterKafkaConsumer implements KafkaConsumer<TwitterAvroModel> {
 
     private final KafkaConfigData kafkaConfigData;
 
+    private final KafkaConsumerConfigData kafkaConsumerConfigData;
+
     public TwitterKafkaConsumer(KafkaListenerEndpointRegistry listenerEndpointRegistry,
                                 KafkaAdminClient adminClient,
-                                KafkaConfigData configData) {
+                                KafkaConfigData configData,
+                                KafkaConsumerConfigData consumerConfigData) {
         this.kafkaListenerEndpointRegistry = listenerEndpointRegistry;
         this.kafkaAdminClient = adminClient;
         this.kafkaConfigData = configData;
+        kafkaConsumerConfigData = consumerConfigData;
     }
+
+
+    @EventListener
+    public void onAppStarted(ApplicationStartedEvent event) {
+        kafkaAdminClient.checkTopicsCreated();
+        LOG.info("Topics with name {} is ready for operations!", kafkaConfigData.getTopicNamesToCreate().toArray());
+        Objects.requireNonNull(kafkaListenerEndpointRegistry
+                .getListenerContainer(kafkaConsumerConfigData.getConsumerGroupId())).start();
+    }
+
 
     @Override
     @KafkaListener(id = "${kafka-consumer-config.consumer-group-id}", topics = "${kafka-config.topic-name}")
