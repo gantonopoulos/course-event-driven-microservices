@@ -10,7 +10,12 @@ spring:
         git:
 #          uri: file://Users/Shared/projects/microservices-demo/config-server-repository
           uri: https://github.com/gantonopoulos/sprint-cloud-config-server-repository
+          default-label: main
           username: gantonopoulos
           password:
           clone-on-start: true # telling the service to clone the configuration-server-repository on-startup
     fail-fast: true
+  security:
+    user:
+      name: spring_cloud_user
+      password: '1234'

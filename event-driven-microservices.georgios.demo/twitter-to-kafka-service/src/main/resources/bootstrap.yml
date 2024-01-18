@@ -8,4 +8,5 @@ spring:
       # Somehow the following translates to config-client-twitter_to_kafka (spring:cloud:config:name-spring:profiles:active)
       # so it points to the configuration file in config-server-repository. I guess we will find out eventually.
       name: twitter-to-kafka-service,config-client
-#      uri: http//localhost:8888
+      username: spring_cloud_user
+      password: '1234'
