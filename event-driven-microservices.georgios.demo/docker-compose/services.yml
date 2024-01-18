@@ -26,7 +26,7 @@ services:
     user: root
     ports:
       - "5007:5007"
-      - "8888:8888"
+      - "8888:8888" # this will allow to reach the config server from the localhost:8888
     volumes:
       - "./docker-logs:/workspace/config-server/logs"
     environment:
