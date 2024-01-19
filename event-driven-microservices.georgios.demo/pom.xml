@@ -24,6 +24,10 @@
 		<module>common-config</module>
         <module>config-server</module>
 		<module>kafka-to-elastic-service</module>
+        <module>elastic</module>
+		<module>elastic/elastic-model</module>
+		<module>elastic/elastic-index-client</module>
+		<module>elastic/elastic-config</module>
 	</modules>
 	<!--	We have no source files, so we set the packaging to pom-->
 	<packaging>pom</packaging>
