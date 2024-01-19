@@ -18,7 +18,7 @@ services:
     volumes:
       - data01_7_17_4_new:/usr/share/elasticsearch/data
     ports:
-      - 9200:9200
+      - "9200:9200"
     networks:
       - ${GLOBAL_NETWORK:-elastic}
   elastic-2:

@@ -48,11 +48,10 @@ public class TwitterKafkaConsumer implements KafkaConsumer<TwitterAvroModel> {
         this.kafkaListenerEndpointRegistry = listenerEndpointRegistry;
         this.kafkaAdminClient = adminClient;
         this.kafkaConfigData = configData;
-        kafkaConsumerConfigData = consumerConfigData;
+        this.kafkaConsumerConfigData = consumerConfigData;
         this.avroToElasticModelTransformer = transformer;
         this.elasticIndexClient = indexClient;
     }
-
 
     @EventListener
     public void onAppStarted(ApplicationStartedEvent event) {
@@ -61,7 +60,6 @@ public class TwitterKafkaConsumer implements KafkaConsumer<TwitterAvroModel> {
         Objects.requireNonNull(kafkaListenerEndpointRegistry
                 .getListenerContainer(kafkaConsumerConfigData.getConsumerGroupId())).start();
     }
-
 
     @Override
     @KafkaListener(id = "${kafka-consumer-config.consumer-group-id}", topics = "${kafka-config.topic-name}")

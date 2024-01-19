@@ -7,6 +7,11 @@ services:
     volumes:
       - "./docker-logs:/workspace/twitter-to-kafka-service/logs"
       - "./check-config-server-started.sh:/usr/local/bin/check-config-server-started.sh"
+    depends_on:
+      - config-server
+      - kafka-broker-1
+      - kafka-broker-2
+      - kafka-broker-3
     user: root
     entrypoint: [ "check-config-server-started.sh" ]
     environment:
@@ -34,6 +39,43 @@ services:
       - "LOG_APP-NAME=config-server"
       - "SERVER_PORT=8888"
       - "ENCRYPT_KEY=${ENCRYPT_KEY}"
+      - "MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://zipkin:9411"
+    networks:
+      - ${GLOBAL_NETWORK:-services}
+  kafka-to-elastic-service:
+    image: ${GROUP_ID}/kafka.to.elastic.service:${SERVICE_VERSION:-latest}
+    ports:
+      - "5006:5006"
+    volumes:
+      - "./docker-logs:/workspace/kafka-to-elastic-service/logs"
+      - "./check-kafka-topics-created.sh:/usr/local/bin/check-kafka-topics-created.sh"
+    user: root
+    entrypoint: ["check-kafka-topics-created.sh"]
+    depends_on:
+      - config-server
+      - twitter-to-kafka-service
+      - kafka-broker-1
+      - kafka-broker-2
+      - kafka-broker-3
+      - elastic-1
+      - elastic-2
+      - elastic-3
+    environment:
+      - "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006 -Xms128m -Xmx256m"
+      - "LOGGING_LEVEL_COM_MICROSERVICES_DEMO=error"
+      - "LOGGING_LEVEL_ROOT=error"
+      - "KAFKA-CONFIG_TOPIC-NAME=twitter-topic"
+      - "KAFKA-CONFIG_BOOTSTRAP-SERVERS=kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092"
+      - "KAFKA-CONFIG_SCHEMA-REGISTRY-URL=http://schema-registry:8081"
+      - "SPRING_CLOUD_CONFIG_URI=http://config-server:8888,http://config-server-ha:8889"
+      - "ELASTIC-CONFIG_INDEX-NAME=twitter-index"
+      - "ELASTIC-CONFIG_CONNECTION-URL=elastic-1:9200"
+      - "LOG_APP-NAME=kafka-to-elastic-service"
+      - "ENCRYPT_KEY=${ENCRYPT_KEY}"
+      - "SPRING_ZIPKIN_SENDER_TYPE=kafka"
+      - "SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092"
+      - "SPRING_SLEUTH_SAMPLER_PROBABILITY=1.0"
+      - "SPRING_DATA_ELASTICSEARCH_CLIENT_REACTIVE_ENDPOINTS=elastic-1:9200"
       - "MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://zipkin:9411"
     networks:
       - ${GLOBAL_NETWORK:-services}
