@@ -72,6 +72,9 @@ Elastic search has some bootstrap checks, which are executed before starting the
 ```
 The above has also been added as an actual request in my Postman account under the udemy collection.
 
+## Searching an index
+To search an index, we can sent a GET request (e.g. using Postman) to localhost:9200/twitter-index/**_search** endpoint.
+
 ## Swapping
 Since swapping can severely damage the performance of ES, it is recommended that in distributes set ups where ES is the 
 only process in the instance, to disable swapping:

@@ -10,3 +10,6 @@ spring:
       name: kafka-to-elastic-service,config-client
       username: spring_cloud_user
       password: '{cipher}c6a082bb8c1470dcc0c78685d8cbe6c409447c69ea89b47a3ee6e71e2f9761213a0e398dda3600fd54db143a76224f68'
+
+log:
+  app-name: kafka-to-elastic-service
