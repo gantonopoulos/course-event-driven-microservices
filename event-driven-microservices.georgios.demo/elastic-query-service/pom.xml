@@ -7,16 +7,12 @@
         <groupId>com.microservices.demo</groupId>
         <artifactId>microservices-demo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>elastic-query-client</artifactId>
+    <groupId>com.event-driven-microservices.georgios</groupId>
+    <artifactId>elastic-query-service</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>com.microservices.demo</groupId>
-            <artifactId>common-util</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.microservices.demo</groupId>
             <artifactId>app-config-data</artifactId>
@@ -27,7 +23,20 @@
         </dependency>
         <dependency>
             <groupId>com.microservices.demo</groupId>
-            <artifactId>elastic-model</artifactId>
+            <artifactId>elastic-query-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
     </dependencies>
 
