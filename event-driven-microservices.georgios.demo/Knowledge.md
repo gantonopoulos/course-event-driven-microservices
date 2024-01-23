@@ -80,6 +80,161 @@ Since swapping can severely damage the performance of ES, it is recommended that
 only process in the instance, to disable swapping:
 https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration-memory.html
 
+## Adding an index
+
+On occasion, for testing purposes, we need to insert some entries to the elastic search index. To do so, the elastic cluster must be running and then we can use postman to issue a POST command.
+
+### Starting the cluster:
+```
+./start-elastic-search-cluster.sh
+```
+
+### Issuing POST command
+**Endpoint:**  twitter-index/_doc/1​
+
+**Body:**
+```json
+{
+    "userId": "1",
+    "id": "1",
+    "createdAt": "2020-01-03T23:00:50+0000",
+    "text": "test multi word"
+}
+```
+
+To add more entries, increase the index at the end of the endpoint.
+
+NOTE: Elastic search, at least for now, allows only one index mapping. This is why why are using "_doc" to access it, but we can ommit it if we want.
+
+## Quering the index
+
+The following are some endpoints we can append to the elastic clustter's address to issue commands which query the elastic index:
+
+
+```http
+GET twitter-index/_search
+```
+Get all data ( Max 10000 records – use scroll Api to get more )​
+
+```http
+GET twitter-index/_search?size=2000
+```
+Specify size in query​
+
+```http
+GET twitter-index/_search?q=id:1
+```
+Get data with id=1​
+
+```http
+GET twitter-index/_search?q=text:test
+```
+Get data with text=test​
+
+NOTE: No need to specify “_doc” mapping in query as current elasticsearch only allows one mapping.​
+
+## Passing queries as JSON
+It is possible to create a query in a JSON format using the ElasticSearch's query language. 
+We do this by sending a POST request to **twitter-index/_search​**
+using as **Body** the JSON query. E.g, to get all index entries with key **text** containing the word "test", we issue the following POST command:
+
+```http
+POST twitter-index/_search​
+```
+
+```json
+{
+    "query": {
+        "term": {
+            "text": "test"
+        }
+    }
+}
+```
+
+### Type of queries supported
+
+#### Match Query
+Uses every word in the input query, analyzes them and returns combinations of those words:
+
+```json
+{
+    "query": {
+        "match": {
+            "text": "test multi word"
+        }
+    }
+}
+```
+The above will return all records that contain one or more instances of the words "test", "multi", "word".
+
+#### Term Query
+By filling in the "keyword" property of **text** we can skip all analysing and ask ES to return any a entries that exactly contain the input text:
+
+```json
+{
+    "query": {
+        "term": {
+            "text.keyword": "test multi word"
+        }
+    }
+}
+```
+
+#### Wildcard Queries
+Will return all entries that contain a word that matchs the wildcard:
+
+```json
+{
+    "query": {
+        "wildcard": {
+            "text": "te*"
+        }
+    }
+}
+```
+The query above will return all entries that contain any word which starts with "te" or "te" itself (* => 0 or more).
+We can define more complex wildcards.
+
+#### Query string
+It analyzes the input, unlike wildcard, and can accept multiple wildcards in the query field:
+
+```json
+{
+    "query": {
+        "query_string": {
+            "query": "text:te*"
+        }
+    }
+}
+```
+
+### Complex Queries
+We can combine the above types to create complex queries. We can use terms like "should" for **OR** conditionals or "must" for **AND**. e.g:
+
+```json
+{
+    "from": 0,
+    "size": 20,
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "match": {
+                        "text": "test"
+                    }
+                },
+                {
+                    "match": {
+                        "text": "word"
+                    }
+                }
+            ]
+        }
+    }
+}
+```
+
 # Important Concepts
 - Quorum (Kafka, Elastic search)
   - Set minimum Number of nodes required to create a network and avoid "split brain".  (Lections: 36)
