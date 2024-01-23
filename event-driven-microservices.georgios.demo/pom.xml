@@ -28,7 +28,8 @@
 		<module>elastic/elastic-model</module>
 		<module>elastic/elastic-index-client</module>
 		<module>elastic/elastic-config</module>
-	</modules>
+        <module>common-util</module>
+    </modules>
 	<!--	We have no source files, so we set the packaging to pom-->
 	<packaging>pom</packaging>
 
@@ -113,6 +114,12 @@
 			<dependency>
 				<groupId>com.microservices.demo</groupId>
 				<artifactId>elastic-index-client</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.microservices.demo</groupId>
+				<artifactId>common-util</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
