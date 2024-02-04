@@ -31,6 +31,14 @@ command without the service container (we want to start twitter-to-kafka-service
 2) Next we need to run the ConfigServer application, because the twitter-to-kafka-service will try to access it to read the configuration values and populate its configuration model. We can start the ConfigServer from the IDE (there exists a build configuration).
 3) Now we can run the twitter-to-kafka-service from the IDE as well (another build configuration). We should see that the service is accessing http://localhost:8888 for configuration, which is where the ConfigServer is running.
 
+# Encryption
+
+We can encrypt/decrypt any string by starting the **config-server** service locally (from the IDE) and then issuing a post command on Postman. I have saved those commands in a collection in my postman account. Keep in ming that **config-server** is using the ENCRYPT_KEY parameter to encrypt/decrypt inputs, so this must be defined in the .bashrc.
+
+## Intellij
+It appears that Intellij cannot read the environment variables from the bashrc (TODO: some configuring must be needed). Which is why we have to define in the build configurartion, a start up environment variable ENCRYPT_KEY with the same value as in .bashrc.
+Docker-compose appears to be accessing the .bashrc without issues, so starting those services (e.g. configuration-client) containerized works as expected.
+
 # Elastic search
 
 ## Firing up docker containers

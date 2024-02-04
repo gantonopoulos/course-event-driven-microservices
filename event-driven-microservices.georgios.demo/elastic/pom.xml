@@ -11,8 +11,4 @@
 
     <artifactId>elastic</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>elastic-query-client</module>
-    </modules>
-
 </project>

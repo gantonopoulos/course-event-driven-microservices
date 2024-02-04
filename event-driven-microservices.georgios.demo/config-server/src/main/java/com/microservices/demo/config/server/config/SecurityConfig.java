@@ -13,7 +13,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain webSecurityCustomizer(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(requests -> requests
+        http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(requests -> requests
                         .requestMatchers(new AntPathRequestMatcher("/actuator/**"),
                                 new AntPathRequestMatcher("/encrypt/**"),
                                 new AntPathRequestMatcher("/decrypt/**"))

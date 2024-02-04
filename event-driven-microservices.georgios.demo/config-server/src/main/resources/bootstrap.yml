@@ -8,6 +8,7 @@ spring:
     config:
       server:
         git:
+          # We can also use a local file path, e.g.:
 #          uri: file://Users/Shared/projects/microservices-demo/config-server-repository
           uri: https://github.com/gantonopoulos/sprint-cloud-config-server-repository
           default-label: main
