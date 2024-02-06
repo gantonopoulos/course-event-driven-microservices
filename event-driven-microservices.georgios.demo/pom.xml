@@ -28,6 +28,7 @@
 		<module>elastic/elastic-model</module>
 		<module>elastic/elastic-index-client</module>
 		<module>elastic/elastic-config</module>
+		<module>elastic/elastic-query-client</module>
         <module>common-util</module>
 		<module>elastic-query-service</module>
 	</modules>

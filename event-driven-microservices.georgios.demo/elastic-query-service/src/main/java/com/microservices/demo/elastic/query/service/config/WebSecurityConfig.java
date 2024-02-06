@@ -18,20 +18,29 @@ import java.util.Arrays;
 public class WebSecurityConfig {
 
 //    @Value("${security.paths-to-ignore}")
-    private final String[] pathsToIgnore = new String[]{"/api-docs","/actuator/**"};
+    private final String[] pathsToIgnore = new String[]{"/**"};
 
+
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http.authorizeHttpRequests(requests -> requests
+//                        .requestMatchers(Arrays.stream(pathsToIgnore)
+//                                .map(AntPathRequestMatcher::new)
+//                                .toList()
+//                                .toArray(new RequestMatcher[]{}))
+//                        .permitAll()
+//                        .anyRequest()
+//                        .authenticated())
+//                .csrf(AbstractHttpConfigurer::disable);
+//        return http.build();
+//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(requests -> requests
-                        .requestMatchers(Arrays.stream(pathsToIgnore)
-                                .map(AntPathRequestMatcher::new)
-                                .toList()
-                                .toArray(new RequestMatcher[]{}))
-                        .permitAll()
-                        .anyRequest()
-                        .authenticated())
-                .csrf(AbstractHttpConfigurer::disable);
+        http
+                .authorizeHttpRequests(requests -> requests
+                        .anyRequest().permitAll()).csrf(AbstractHttpConfigurer::disable); // Permit all requests without authentication
+
         return http.build();
     }
 
