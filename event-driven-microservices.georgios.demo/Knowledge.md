@@ -243,6 +243,9 @@ We can combine the above types to create complex queries. We can use terms like 
 }
 ```
 
+## Using Repository bean in Elastic Search 
+There is a Repository pattern implementation in Spring (see [TwitterElasticsearchQueryRepository's](./elastic/elastic-query-client/src/main/java/com/microservices/demo/elastic/query/client/repository/TwitterElasticsearchQueryRepository.java) definition). This offers another way of querying data from elastic search, which however cannot be used for more complex queries. It fetches data in bulk (and then one can refine the fetched collection) or performs CRUD operations. In comparison, the **ElasticsearchOperations** (see [TwitterElasticQueryClient](./elastic/elastic-query-client/src/main/java/com/microservices/demo/elastic/query/client/service/impl/TwitterElasticQueryClient.java)) offers an API with which one can formulate complex queries, which are then sent to the client and you get the results back.
+
 # Important Concepts
 - Quorum (Kafka, Elastic search)
   - Set minimum Number of nodes required to create a network and avoid "split brain".  (Lections: 36)
