@@ -275,6 +275,45 @@ For a request of all documents on the "documents" endpoint of our elastic query 
     }
 ```
 
+# API Versioning
+
+## Versioning by URI
+
+Normally, using this method we need to create a new controller and then version the endpoint. But you can also directly version the endpoints on the method level for simplicity.
+
+In this case we end up with different uris for the same endpoint on different versions. e.g, switch to **version-by-uri** branch, start elastic-cluster, config server and elastic query service and issue in Postman the following two uris:
+
+``` http
+localhost:8183/elastic-query-service/documents/v1/8522739414942840755
+localhost:8183/elastic-query-service/documents/v2/8522739414942840755
+```
+
+## Media type versioning
+In this method we define a media type on the Controller level fist (controller class) by adding the **produces** property. In our example we use a media type we have defined (custom vendor media type), named **application/vnd.api.v1+json**:
+
+``` java
+@RequestMapping(value = "/documents", produces = "application/vnd.api.v1+json")
+```
+
+Thus we version our API with v1. This specific version has to be requested by the client by use of the **Accepts** header. This way we do not have to change the uri. If we have a new version in one of our endpoints for example, we can mark it with **application/vnd.api.*v2*+json**, e.g.:
+
+``` java
+@GetMapping(value = "/{id}",  produces = "application/vnd.api.v2+json")
+    public @ResponseBody
+    ResponseEntity<ElasticQueryServiceResponseModelV2>
+    getDocumentByIdV2(@PathVariable @NotEmpty String id) {
+        ElasticQueryServiceResponseModelV2 elasticQueryServiceResponseModel = getV2Model(elasticQueryService.getDocumentById(id));
+        LOG.debug("Elasticsearch returned document with id {}", id);
+        return ResponseEntity.ok(elasticQueryServiceResponseModel);
+    }
+```
+
+In the Postman, we only have to add a new **Accepts** clause in the headers with the custom media type of the new version in our request to the endpoint.
+
+This way we can also include the change in our documentation and API definition so that our clients can see the new changes.
+
+If the clients on their side want to start using the new API, the can choose to do so by adding the header clause and adjusting their model.
+
 # Important Concepts
 - Quorum (Kafka, Elastic search)
   - Set minimum Number of nodes required to create a network and avoid "split brain".  (Lections: 36)
