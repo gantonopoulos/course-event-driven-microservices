@@ -246,8 +246,39 @@ We can combine the above types to create complex queries. We can use terms like 
 ## Using Repository bean in Elastic Search 
 There is a Repository pattern implementation in Spring (see [TwitterElasticsearchQueryRepository's](./elastic/elastic-query-client/src/main/java/com/microservices/demo/elastic/query/client/repository/TwitterElasticsearchQueryRepository.java) definition). This offers another way of querying data from elastic search, which however cannot be used for more complex queries. It fetches data in bulk (and then one can refine the fetched collection) or performs CRUD operations. In comparison, the **ElasticsearchOperations** (see [TwitterElasticQueryClient](./elastic/elastic-query-client/src/main/java/com/microservices/demo/elastic/query/client/service/impl/TwitterElasticQueryClient.java)) offers an API with which one can formulate complex queries, which are then sent to the client and you get the results back.
 
+# HATEOAS (Hypermedia As The Engine Of Application State)
+HATEOAS stipulates that the representations of REST resources should contain also links to the related resources and not only the data itself. This information must be provided by the server dynamically with hypermedia.
+
+## Advantages
+- Helps the client to better understand the API and use it easier.
+- Reduces the risk of a client breaking due to api changes.
+
+## Example
+
+For a request of all documents on the "documents" endpoint of our elastic query service, we can display the explicit path of each result along with the endpoint hit:
+
+``` json
+ {
+        "id": "8522739414942840755",
+        "userId": 722153625744397953,
+        "text": "Lorem ....",
+        "links": [
+            {
+                "rel": "self",
+                "href": "http://localhost:8183/elastic-query-service/documents/8522739414942840755"
+            },
+            {
+                "rel": "documents",
+                "href": "http://localhost:8183/elastic-query-service/documents"
+            }
+        ]
+    }
+```
+
 # Important Concepts
 - Quorum (Kafka, Elastic search)
   - Set minimum Number of nodes required to create a network and avoid "split brain".  (Lections: 36)
 - Configuration as a Service
 - Inverted index (Elastic search)
+- HATEOAS
+- Richardson Maturity Model
